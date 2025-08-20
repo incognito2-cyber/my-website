@@ -290,11 +290,11 @@
     if (passwordEl.type === 'password') {
       passwordEl.type = 'text';
       togglePasswordBtn.textContent = '🙈';
-      togglePasswordBtn.title = 'Скрыть пароль';
+      togglePasswordBtn.title = 'Hide password';
     } else {
       passwordEl.type = 'password';
       togglePasswordBtn.textContent = '👁️';
-      togglePasswordBtn.title = 'Показать пароль';
+      togglePasswordBtn.title = 'Show password';
     }
   });
 
@@ -325,8 +325,8 @@
   encryptBtn.onclick = async () => {
     const message = messageEl.value.trim();
     const password = passwordEl.value;
-    if (!message) return showError('Введите сообщение для шифрования.');
-    if (!password) return showError('Введите пароль.');
+    if (!message) return showError('Enter a message to encrypt.');
+    if (!password) return showError('Enter password.');
     try {
       resultEl.classList.remove('show');
       copyBtn.style.display = 'none';
@@ -335,15 +335,15 @@
       const encrypted = await encrypt(message, password);
       showResult(encrypted);
     } catch(e) {
-      showError('Ошибка при шифровании: ' + e.message);
+      showError('Error while encrypting: ' + e.message);
     }
   };
 
   decryptBtn.onclick = async () => {
     const encrypted = messageEl.value.trim();
     const password = passwordEl.value;
-    if (!encrypted) return showError('Введите зашифрованный текст.');
-    if (!password) return showError('Введите пароль.');
+    if (!encrypted) return showError('Enter encrypted text.');
+    if (!password) return showError('Enter password.');
     try {
       resultEl.classList.remove('show');
       copyBtn.style.display = 'none';
@@ -352,11 +352,11 @@
       const decrypted = await decrypt(encrypted, password);
       showResult(decrypted);
     } catch(e) {
-      showError('Ошибка расшифровки! Проверьте пароль и данные.');
+      showError('Decryption error! Check your password and data.');
     }
   };
 
-  // Копирование текста результата в буфер обмена
+  // Copying the result text to the clipboard
   copyBtn.addEventListener('click', () => {
     if (!resultEl.textContent) return;
     navigator.clipboard.writeText(resultEl.textContent).then(() => {
